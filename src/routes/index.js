@@ -11,7 +11,6 @@ router.get('/alta', (req, res, next)=>{
 }); 
 
 router.post('/alta', passport.authenticate('contrasenaLocal',{ //Lo de CONTRASENALOCAL lo extras directamente passport/local-auth
-    
     successRedirect: '/perfil',
     failureRedirect: '/alta',
     passReqToCallback: true //internamente se envian los datos del cliente desde el Req

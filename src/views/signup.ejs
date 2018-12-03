@@ -1,3 +1,7 @@
+<% if (errorCuentaTomada) { %>
+    <h6> Nota: basicamente si existe el errorCuentaTomada quiero que me muestres el error errorCuentaTomada</h6>
+    <div><%= errorCuentaTomada %> </div>
+<% } %>
 <h1>EN estos momentos te encunetras en la pagina SiUp</h1>
 <form action="/alta"  method="POST">
     <input type="email" name="email" id="" placeholder="Insert Email">
@@ -5,4 +9,4 @@
     <button type="submit">
         Registrate 
     </button>
-</form>
+</form>  

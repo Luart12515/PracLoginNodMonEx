@@ -26,10 +26,22 @@ passport.use('contrasenaLocal', new localStrategy({ //objeto de congifuracion ||
         //REQ: nos perdite recibir mas datos y guardarlos 
         //DONE: permite devolverle al cliente, algunos datos
         
-        const user = new User();  //designacion de los valores 
-        user.email = email;
-        user.password = user.encryptPassword(password);
-        await user.save(); //metod asincrono || AWAIT guarda los valores 
-        done(null, user); // ** 
+
+        {/* SISTEMA DE VALIDACION DE CORREO A TRAVEZ DEL CORREO   */}
+        const userRegistrado= User.findOne({email: email}); 
+        if(userRegistrado){
+            //1Val= no a ocurrido un error || 2°= no te vamos a devolver un usuario || 3° vamos a enviar un mensaje a travez del modulo flash   
+            //3°= nombre de la variable (MENSAJE) || Mensaje a mostrar.
+            return done (null, false, req.flash('errorCuentaTomada',' El correo electronico ya fue elegido por alguien mas trate con otro '));
+        } else{
+            {/* CREACION DE NUEVOS USUARIOS */}       
+            const newUser = new User();  //designacion de los valores 
+            newUser.email = email;
+            newUser.password = newUser.passwordsecreto(password);
+            await newUser.save(); //metod asincrono || AWAIT guarda los valores 
+            done(null, newUser); // **
+        }
+
+         
     }
 ));
